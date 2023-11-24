@@ -14,13 +14,14 @@ public class Executor implements Acciones {
     OutputStream out;
     FileManager fileManager;
 
-    static boolean detenerMinero = false;
+    static boolean detenerMinero ;
 
 
     public Executor(String[] contenido, OutputStream out) {
         this.contenido = contenido;
         this.out = out;
         this.fileManager = new FileManager();
+        detenerMinero = false;
     }
     @Override
     public void ProcesoActualizacionInicial(){
