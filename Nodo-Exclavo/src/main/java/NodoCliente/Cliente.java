@@ -27,7 +27,7 @@ public class Cliente {
         // Validacion : [V-1482611-5-0123546045-0154065046-00000b98585c99d37fbaad938591c3239b879938937e27ac1a4e841eda3be0ab]
         // Blockchain : B-1992-4567-45678.78-0001354654;B-1993-4567-45678.78-0001354654;
         // Rellenado inicial: [C-1-120.4;2-0.0;3-455.5]
-        String mensaje  = "V-1482611-5-0123546045-0154065046-00000b98585c99d37fbaad938591c3239b879938937e27ac1a4e841eda3be0ab";
+        String mensaje  = "M-5-0123546045-0154065046";
         escribir.println(mensaje);
 
         Scanner sc =  new Scanner(in);

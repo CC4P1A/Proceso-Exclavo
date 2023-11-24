@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,17 +37,23 @@ public class Listener implements Runnable{
             try {
                 System.out.println("Escuchando en el puerto ("+puerto+") . . . ");
                 Socket socketRedirection = serverSocket.accept();
+
                 // Leemos el input
                 in = socketRedirection.getInputStream();
                 out = socketRedirection.getOutputStream();
 
-                String mensaje = ReadInput(in);
-                this.mensaje  = mensaje;
-                if(mensaje!=null){
-                    DefinoProcesos();
-                    EvaluarMensaje(mensaje);
+                Scanner sc = new Scanner(in, StandardCharsets.UTF_8);
+                while (sc.hasNextLine()) {
+                    String mensaje = sc.nextLine();
+                    if(mensaje.startsWith("V")){
+                        System.out.println("Mensaje Leido : "+mensaje);
+                    }
+                    this.mensaje = mensaje;
+                    if (mensaje != null) {
+                        DefinoProcesos();
+                        EvaluarMensaje(mensaje);
+                    }
                 }
-
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -66,11 +73,11 @@ public class Listener implements Runnable{
         acciones.put("B", ()-> {
             ex.contenido = mensaje.split(";");
             ex.ProcesoBlockchain();});
-        acciones.put("C",()->{
-            char[] chrs= mensaje.toCharArray();
-            char[] new_chr = Arrays.copyOfRange(chrs,2,chrs.length);
-            mensaje = new String(new_chr);
-            ex.contenido =mensaje.split(";");
+        acciones.put("C", () -> {
+            char[] chrs = mensaje.toCharArray();
+            char[] new_chr = Arrays.copyOfRange(chrs, 2, chrs.length);
+            String nuevoMensaje = new String(new_chr);
+            ex.contenido = nuevoMensaje.split(";");
             ex.ProcesoActualizacionInicial();
         });
     }

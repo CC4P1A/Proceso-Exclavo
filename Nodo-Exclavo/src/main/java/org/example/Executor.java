@@ -114,6 +114,7 @@ public class Executor implements Acciones {
                 envio[1] = String.valueOf(nonce);
                 envio[2] = String.valueOf(tiempoTotal);
                 envio[3] = n_Ceros;
+
                 envio[4] = HashActual;
                 break;
             }
@@ -129,7 +130,7 @@ public class Executor implements Acciones {
 
 
         // Formato Envio :modo-nonce-tiempo-nroCeros-hashAnt-hashRaiz-HashTotal
-        String mensaje = envio[0] + "-" + envio[1] + "-" + envio[2] + "-" + envio[3] + HashAnt + HasRaiz +
+        String mensaje = envio[0] + "-" + envio[1] + "-" + envio[2] + "-" + envio[3] + "-" + HashAnt + "-" + HasRaiz +
                 "-" + envio[4];
         EnvioMensaje(mensaje);
 
